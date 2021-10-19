@@ -1,0 +1,19 @@
+
+<app-header></app-header>
+
+<div class="container_pregunta">
+
+    
+
+    <div class="frame_pregunta">
+
+    <p class="intro_pregunta" style="background-color:{{pregunta.BG_Color}}; color:{{pregunta.Color}}">PREGUNTA {{pregunta.id}} DE 20</p>
+    <p class="pregunta_pregunta">{{pregunta.title}}</p>
+    <button class="btn2_pregunta" mat-button color=accent (click)="btnClick(0)">{{pregunta.opcionesPregunta[0].title}}</button>
+    <button class="btn2_pregunta" mat-button color=accent (click)="btnClick(1)">{{pregunta.opcionesPregunta[1].title}}</button>
+    <button class="btn2_pregunta" mat-button color=accent (click)="btnClick(2)">{{pregunta.opcionesPregunta[2].title}}</button>
+    <button class="btn2_pregunta" mat-button color=accent (click)="btnClick(3)">{{pregunta.opcionesPregunta[3].title}}</button>
+    <button class="btn2_pregunta" mat-button color=accent (click)="btnClick(4)">{{pregunta.opcionesPregunta[4].title}}</button>
+    <button class="btn2_pregunta" mat-button (click)="btnClick(5)">{{pregunta.opcionesPregunta[5].title}}</button>
+    <button class="btn2_pregunta" mat-button color=accent (click)="btnClick(6)">{{pregunta.opcionesPregunta[6].title}}</button>
+    </div>
