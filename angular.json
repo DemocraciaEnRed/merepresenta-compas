@@ -32,7 +32,6 @@
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js"
-
             ]
           },
           "configurations": {
@@ -103,6 +102,10 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }

@@ -1,4 +1,4 @@
-# TriviaCompass
+# Compas politico - Me representa
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
@@ -13,6 +13,12 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Deployment to compaspolitico.merepresenta.info
+
+Run `npm run deploy` to build and deploy in the branch `gh-pages` of this repository.
+
+You can also run `ng deploy --cname=compaspolitico.merepresenta.info` if you prefer.
 
 ## Running unit tests
 
