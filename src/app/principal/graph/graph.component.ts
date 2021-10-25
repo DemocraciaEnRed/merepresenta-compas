@@ -1,6 +1,7 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TriviaService } from '../trivia_service/trivia.service';
+import { AppComponent } from '../../app.component';
 
 import { GoogleChartsModule } from 'angular-google-charts';
 
@@ -21,7 +22,8 @@ export class GraphComponent implements OnInit {
   descripcion_resultado:String ='Holaaa';
   categorias: CategoriaResultado[]=[];
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
+
     this.posX= this.triviaService.trivia.PositionX;
     this.posY= this.triviaService.trivia.PositionY;
     console.log(this.posX,this.posY);
@@ -88,6 +90,7 @@ export class GraphComponent implements OnInit {
 
    scatterChartOptions: ChartOptions = {
     responsive: true,
+    aspectRatio: this.parent.deviceXs? 0.7 : 2,
     showLines:false,
     spanGaps:false,
     scales: {
@@ -152,7 +155,7 @@ export class GraphComponent implements OnInit {
       backgroundColor: "#ffffff"
     }]
 
-  constructor(private triviaService:TriviaService,private _router: Router) { 
+  constructor(private triviaService:TriviaService,private _router: Router, @Inject(AppComponent) private parent: AppComponent) { 
     //this.posX=triviaService.trivia.PositionX;
     //this.posY=triviaService.trivia.PositionY; 
     //(this.scatterChartData[0].data as number[]).push(this.posX,this.posY);
