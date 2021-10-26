@@ -2,7 +2,7 @@
 
 .container_pregunta{
     background: url('./../../../assets/imgs/Fondo2.svg');
-    position: fixed;
+    position: relative;
     background-repeat: repeat;
     background-position: center;
     background-size: auto;
