@@ -101,8 +101,9 @@ export class GraphComponent implements OnInit {
         },
         display: true,
         ticks: {
-          max : 30,
-          min: -30,
+          max : 20,
+          min: -20,
+          display: false
         }
     }],
       yAxes: [{
@@ -113,13 +114,14 @@ export class GraphComponent implements OnInit {
               zeroLineColor:"grey",
           },
           scaleLabel:{
-            display:false,
+            display:true,
             lineHeight:0,
           },
           display: true,
           ticks: {
-            max : 30,
-            min: -30
+            max : 20,
+            min: -20,
+            display: false
           }
       }],
     },
