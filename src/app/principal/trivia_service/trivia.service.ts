@@ -46,11 +46,15 @@ export class TriviaService {
   }
 
   setScore(orden: number, optionChoiced:number){
-    if(this.trivia.cuestionario[orden].Axis=="x"){
-      this.trivia.PositionX=this.trivia.PositionX+this.trivia.cuestionario[orden].QuestionScore*(optionChoiced-3)
+    const { Axis, QuestionScore, opcionesPregunta } = this.trivia.cuestionario[orden];
+    const optionScore = opcionesPregunta[optionChoiced].puntaje;
+    const score = QuestionScore*optionScore;
+
+    if(Axis == "x"){
+      this.trivia.PositionX+=score;
     }
     else{
-      this.trivia.PositionY=this.trivia.PositionY+this.trivia.cuestionario[orden].QuestionScore*(optionChoiced-3)
+      this.trivia.PositionY+=score;
     }
   }
 

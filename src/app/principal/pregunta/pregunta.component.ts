@@ -37,16 +37,14 @@ export class PreguntaComponent implements OnInit {
   }
 
   btnClick(optionChoiced:number){
-    if(this.orden<19){
-    this.orden++;
-    this.pregunta=this.triviaService.getPregunta(this.orden);
     this.triviaService.setScore(this.orden,optionChoiced);
-    this.posX=this.triviaService.trivia.PositionX
-    this.posY=this.triviaService.trivia.PositionY
+    this.posX=this.triviaService.trivia.PositionX;
+    this.posY=this.triviaService.trivia.PositionY;
+    this.orden++;
+
+    if (this.orden < 20)
+      this.pregunta=this.triviaService.getPregunta(this.orden);
+    else
+      this._router.navigateByUrl('chart');
   }
-  else{
-    console.log(this.posX, this.posY);
-    this._router.navigateByUrl('chart');
-  }
-}
 }

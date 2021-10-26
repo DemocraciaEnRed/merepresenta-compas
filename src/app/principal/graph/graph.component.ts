@@ -1,6 +1,7 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TriviaService } from '../trivia_service/trivia.service';
+import { AppComponent } from '../../app.component';
 
 import { GoogleChartsModule } from 'angular-google-charts';
 
@@ -21,7 +22,8 @@ export class GraphComponent implements OnInit {
   descripcion_resultado:String ='Holaaa';
   categorias: CategoriaResultado[]=[];
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
+
     this.posX= this.triviaService.trivia.PositionX;
     this.posY= this.triviaService.trivia.PositionY;
     console.log(this.posX,this.posY);
@@ -82,12 +84,11 @@ export class GraphComponent implements OnInit {
         this.categorias[3].selected=false;
         this.categorias[1].selected=false;
     }
-  }
-
-  
+  }  
 
    scatterChartOptions: ChartOptions = {
     responsive: true,
+    aspectRatio: this.parent.deviceXs? 0.7 : 2,
     showLines:false,
     spanGaps:false,
     scales: {
@@ -100,8 +101,9 @@ export class GraphComponent implements OnInit {
         },
         display: true,
         ticks: {
-          max : 30,
-          min: -30,
+          max : 20,
+          min: -20,
+          display: false
         }
     }],
       yAxes: [{
@@ -112,18 +114,35 @@ export class GraphComponent implements OnInit {
               zeroLineColor:"grey",
           },
           scaleLabel:{
-            display:false,
+            display:true,
             lineHeight:0,
           },
           display: true,
           ticks: {
-            max : 30,
-            min: -30
+            max : 20,
+            min: -20,
+            display: false
           }
       }],
     },
-
-
+    tooltips: {
+      callbacks: {
+         title: function(t, d) {
+            return "";
+         },
+         label: (t, d) => {
+           if (this.posX == 0 && this.posY == 0) return "WOW... estás en el centro!";
+          const horizontalLabel = this.posX > 0? "derecha" : "izquierda";
+          const verticalLabel = this.posY > 0? "comunitarista" : "liberal";
+          const xNumber = parseInt(t.xLabel?.toString() ?? "0");
+          const yNumber = parseInt(t.yLabel?.toString() ?? "0");
+          const horizontalResult = Math.abs(xNumber) + "% de " + horizontalLabel;
+          const verticalResult = Math.abs(yNumber) + "% " + verticalLabel;
+          return [horizontalResult, verticalResult];
+         }
+      },
+      displayColors: false
+   }
   };
 
    scatterChartLabels: Label[] = [''];
@@ -152,7 +171,7 @@ export class GraphComponent implements OnInit {
       backgroundColor: "#ffffff"
     }]
 
-  constructor(private triviaService:TriviaService,private _router: Router) { 
+  constructor(private triviaService:TriviaService,private _router: Router, @Inject(AppComponent) private parent: AppComponent) { 
     //this.posX=triviaService.trivia.PositionX;
     //this.posY=triviaService.trivia.PositionY; 
     //(this.scatterChartData[0].data as number[]).push(this.posX,this.posY);
