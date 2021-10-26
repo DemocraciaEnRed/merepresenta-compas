@@ -216,7 +216,7 @@ export const Cuestionario: Pregunta[] = [
         id: 20,
         title: 'Industrias estratégicas como la nuclear o la militar no deberían estar en manos del sector privado.',
         opcionesPregunta: OpcionesData,
-        QuestionScore: -1,
+        QuestionScore: 1,
         Axis: "x",
         BG_Color: "#000000",
         Color:"#ffffff",
