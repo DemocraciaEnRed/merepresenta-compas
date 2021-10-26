@@ -133,7 +133,7 @@ export class GraphComponent implements OnInit {
          label: (t, d) => {
            if (this.posX == 0 && this.posY == 0) return "WOW... estás en el centro!";
           const horizontalLabel = this.posX > 0? "derecha" : "izquierda";
-          const verticalLabel = this.posY > 0? "populista" : "liberal";
+          const verticalLabel = this.posY > 0? "comunitarista" : "liberal";
           const xNumber = parseInt(t.xLabel?.toString() ?? "0");
           const yNumber = parseInt(t.yLabel?.toString() ?? "0");
           const horizontalResult = Math.abs(xNumber) + "% de " + horizontalLabel;

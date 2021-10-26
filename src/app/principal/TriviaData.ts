@@ -232,11 +232,11 @@ export const Cuestionario: Pregunta[] = [
         Description: 'Las personas en este cuadrante tratan de defender la libertad como bien político primario en todos los sentidos. Estas personas suelen verse a sí mismas como partidarias acérrimas de la libertad personal y económica y son muy escépticas sobre los planes y metas colectivos, poniendo por encima la asociación voluntaria y la caridad a los mandatos estatales por la igualdad. Normalmente, le otorgan al Estado un papel marginal con respecto a las personas de los otros tres cuadrantes, creen en el orden social espontáneo que da el mercado. Es por eso que estas personas se revelan contra los impuestos, que constituyen un acto de coacción y, por ende, una violación de su libertad individual.',
         selected: false},
         {
-        Title: 'Populismo de izquierda',
+        Title: 'Comunitarismo de izquierda',
         Description: 'Las personas en este cuadrante tratan de promover soluciones comunales a los problemas sociales y económicos. Estas personas suelen verse a sí mismas como favorables a un formas estatales que frenen los excesos del capitalismo y el poder de las élites y, así, disminuir la desigualdad social en una economía mixta y con un estado presente. Sus soluciones son colectivas, con valores asociados a formas de democracia más directas, con el Estado interviniendo en la economía para la redistribución de bienes y servicios.',
         selected: false},
         {
-        Title: 'Populismo de derecha',
+        Title: 'Comunitarismo de derecha',
         Description: 'Los personas en este cuadrante sostienen el orden social heredado y defienden la soberanía del Estado, con una visión paternalista de la política. Estas personas suelen verse a sí mismas como defensoras de lo que sus antepasados hubieran querido, con las jerarquías de toda la vida y los valores tradicionales. Aunque, normalmente, consideran que el Estado tiene un papel en los asuntos de seguridad y en la defensa de la cultura nacional, tienden a ver con más escepticismo la participación del Estado en la economía.',
         selected: false}
     ]
