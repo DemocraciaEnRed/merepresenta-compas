@@ -205,7 +205,7 @@ export const Cuestionario: Pregunta[] = [
         },
         {
         id: 19,
-        title: 'Es importante fomentar y proteger la industria nacional.',
+        title: 'Es prioritario fomentar y proteger la industria nacional.',
         opcionesPregunta: OpcionesData,
         QuestionScore: -1,
         Axis: "x",
