@@ -125,6 +125,9 @@ export class GraphComponent implements OnInit {
           }
       }],
     },
+    legend: {
+      display: false
+    },
     tooltips: {
       callbacks: {
          title: function(t, d) {

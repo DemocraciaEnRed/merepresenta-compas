@@ -1,25 +1,19 @@
-
-
-.container_pregunta{
-    background: url('./../../../assets/imgs/Fondo2.svg');
-    position: relative;
-    background-repeat: repeat;
+.container_pregunta {
     background-position: center;
     background-size: auto;
     width: 100%;
-    height:100%;
-
+    height: 100%;
 }
 
-.frame_pregunta{
-    background:none;
+.frame_pregunta {
+    background: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.intro_pregunta{
+.intro_pregunta {
     font-size: 1.2em;
     font-family: 'Nippo-Medium';
     margin-top: 50px;
@@ -27,7 +21,7 @@
     padding: 5px 50px 5px 50px;
 }
 
-.pregunta_pregunta{
+.pregunta_pregunta {
     font-size: 1.3em;
     font-family: 'Nippo-Medium';
     margin-bottom: 0px;
@@ -38,7 +32,7 @@
     padding: 20px;
 }
 
-.btn_pregunta{
+.btn_pregunta {
     width: 300px;
     height: 80px;
     font-size: 1.5em;
@@ -46,7 +40,7 @@
     font-family: 'GeneralSans-Regular';
 }
 
-.btn2_pregunta{
+.btn2_pregunta {
     width: 350px;
     height: 40px;
     font-size: 1.2em;
