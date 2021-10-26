@@ -84,9 +84,7 @@ export class GraphComponent implements OnInit {
         this.categorias[3].selected=false;
         this.categorias[1].selected=false;
     }
-  }
-
-  
+  }  
 
    scatterChartOptions: ChartOptions = {
     responsive: true,
@@ -125,8 +123,24 @@ export class GraphComponent implements OnInit {
           }
       }],
     },
-
-
+    tooltips: {
+      callbacks: {
+         title: function(t, d) {
+            return "";
+         },
+         label: (t, d) => {
+           if (this.posX == 0 && this.posY == 0) return "WOW... estás en el centro!";
+          const horizontalLabel = this.posX > 0? "derecha" : "izquierda";
+          const verticalLabel = this.posY > 0? "populista" : "liberal";
+          const xNumber = parseInt(t.xLabel?.toString() ?? "0");
+          const yNumber = parseInt(t.yLabel?.toString() ?? "0");
+          const horizontalResult = Math.abs(xNumber) + "% de " + horizontalLabel;
+          const verticalResult = Math.abs(yNumber) + "% " + verticalLabel;
+          return [horizontalResult, verticalResult];
+         }
+      },
+      displayColors: false
+   }
   };
 
    scatterChartLabels: Label[] = [''];
