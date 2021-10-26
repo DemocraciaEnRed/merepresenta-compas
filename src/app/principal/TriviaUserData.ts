@@ -9,7 +9,7 @@ export const CuestionarioUser: PreguntaUsuario[] = [
     {
         id: 2,
         title: '¿Qué edad tenés?',
-        options:["0-20 GEN Z","20-40 MILLENIAL","40-60 GEN X","+60 BOOMER"],
+        options:["0-20 AÑOS","20-40 AÑOS","40-60 AÑOS","+60 AÑOS"],
     },
     {
         id: 3,
