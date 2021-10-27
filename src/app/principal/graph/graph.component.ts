@@ -91,6 +91,13 @@ export class GraphComponent implements OnInit {
     aspectRatio: this.parent.deviceXs? 0.7 : 2,
     showLines:false,
     spanGaps:false,
+    layout: {
+      padding: {
+        top: 10,
+        bottom: 15,
+        left: -10
+      }
+    },
     scales: {
       xAxes: [{
         gridLines: {
@@ -158,7 +165,7 @@ export class GraphComponent implements OnInit {
         {x: this.posX as number,y: this.posY as number},        
       ],
       label: '',
-      pointRadius: 10,
+      pointRadius: 10
     },
   ];
 
