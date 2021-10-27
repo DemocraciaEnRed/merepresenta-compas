@@ -108,8 +108,8 @@ export class GraphComponent implements OnInit {
         },
         display: true,
         ticks: {
-          max : 20,
-          min: -20,
+          max : 33,
+          min: -33,
           display: false
         }
     }],
@@ -126,8 +126,8 @@ export class GraphComponent implements OnInit {
           },
           display: true,
           ticks: {
-            max : 20,
-            min: -20,
+            max : 33,
+            min: -33,
             display: false
           }
       }],
