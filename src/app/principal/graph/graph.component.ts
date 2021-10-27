@@ -24,8 +24,8 @@ export class GraphComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.posX= this.triviaService.trivia.PositionX;
-    this.posY= this.triviaService.trivia.PositionY;
+    this.posX= this.triviaService.trivia.PositionX / 30 * 100;
+    this.posY= this.triviaService.trivia.PositionY / 30 * 100;
     console.log(this.posX,this.posY);
 
     this.categorias=this.triviaService.categorias;
@@ -108,8 +108,8 @@ export class GraphComponent implements OnInit {
         },
         display: true,
         ticks: {
-          max : 33,
-          min: -33,
+          max : 109,
+          min: -109,
           display: false
         }
     }],
@@ -126,8 +126,8 @@ export class GraphComponent implements OnInit {
           },
           display: true,
           ticks: {
-            max : 33,
-            min: -33,
+            max : 109,
+            min: -109,
             display: false
           }
       }],
@@ -144,10 +144,17 @@ export class GraphComponent implements OnInit {
            if (this.posX == 0 && this.posY == 0) return "WOW... estás en el centro!";
           const horizontalLabel = this.posX > 0? "derecha" : "izquierda";
           const verticalLabel = this.posY > 0? "populista" : "liberal";
-          const xNumber = parseInt(t.xLabel?.toString() ?? "0");
-          const yNumber = parseInt(t.yLabel?.toString() ?? "0");
-          const horizontalResult = Math.abs(xNumber) + "% de " + horizontalLabel;
-          const verticalResult = Math.abs(yNumber) + "% " + verticalLabel;
+          const _toNumber = (label: string | number | undefined) => {
+            const string = label?.toString();
+            const percentage = parseFloat(string ?? "0");
+            const absoluted = Math.abs(percentage);
+            return Math.ceil(absoluted);
+          }
+
+          const xNumber = _toNumber(t.xLabel);
+          const yNumber = _toNumber(t.yLabel);
+          const horizontalResult = xNumber + "% de " + horizontalLabel;
+          const verticalResult = yNumber + "% " + verticalLabel;
           return [horizontalResult, verticalResult];
          }
       },
