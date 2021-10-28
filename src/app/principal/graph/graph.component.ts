@@ -88,7 +88,7 @@ export class GraphComponent implements OnInit {
 
    scatterChartOptions: ChartOptions = {
     responsive: true,
-    aspectRatio: this.parent.deviceXs? 0.7 : 2,
+    aspectRatio: this.parent.deviceXs? 0.7 : 2.5,
     showLines:false,
     spanGaps:false,
     layout: {
