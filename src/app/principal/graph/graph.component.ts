@@ -1,9 +1,25 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, Inject, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TriviaService } from '../trivia_service/trivia.service';
 import { AppComponent } from '../../app.component';
 
 import { GoogleChartsModule } from 'angular-google-charts';
+
+import {
+  ApexAxisChartSeries,
+  ApexTitleSubtitle,
+  ApexDataLabels,
+  ApexChart,
+  ChartComponent
+} from "ng-apexcharts";
+
+export type ApexChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  title: ApexTitleSubtitle;
+  colors: any;
+};
 
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -22,8 +38,11 @@ export class GraphComponent implements OnInit {
   descripcion_resultado:String ='Holaaa';
   categorias: CategoriaResultado[]=[];
 
-  ngOnInit(): void {
+  @ViewChild("chart")
+  chart: ChartComponent = new ChartComponent;
+  chartOptions!: ApexChartOptions;
 
+  ngOnInit(): void {
     this.posX= this.triviaService.trivia.PositionX / 30 * 100;
     this.posY= this.triviaService.trivia.PositionY / 30 * 100;
     console.log(this.posX,this.posY);
@@ -84,6 +103,30 @@ export class GraphComponent implements OnInit {
         this.categorias[3].selected=false;
         this.categorias[1].selected=false;
     }
+
+    this.chartOptions = {
+      series: [
+        {
+          name: "Liberal",
+          data: [{ x: "Izquierda", y: 2}, { x: "Derecha", y: 0}]
+        },
+        {
+          name: "Populista",
+          data: [{ x: "Izquierda", y: 5}, { x: "Derecha", y: 0}]
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "heatmap"
+      },
+      dataLabels: {
+        enabled: false
+      },
+      colors: ["#008FFB"],
+      title: {
+        text: "HeatMap Chart (Single color)"
+      }
+    };
   }  
 
    scatterChartOptions: ChartOptions = {
@@ -192,7 +235,6 @@ export class GraphComponent implements OnInit {
     //this.posX=triviaService.trivia.PositionX;
     //this.posY=triviaService.trivia.PositionY; 
     //(this.scatterChartData[0].data as number[]).push(this.posX,this.posY);
-
   }
 
    // events
