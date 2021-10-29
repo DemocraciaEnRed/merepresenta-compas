@@ -24,9 +24,8 @@
 .pregunta_pregunta {
     font-size: 1.3em;
     font-family: 'Nippo-Medium';
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     text-align: center;
-    min-height: 80px;
     justify-content: center;
     align-self: center;
     padding: 20px;
