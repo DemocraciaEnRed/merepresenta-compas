@@ -108,11 +108,11 @@ export class GraphComponent implements OnInit {
       series: [
         {
           name: "Liberal",
-          data: [{ x: "Izquierda", y: 2}, { x: "Derecha", y: 0}]
+          data: [{ x: "Izquierda", y: 2}, { x: "Derecha", y: 1}]
         },
         {
           name: "Populista",
-          data: [{ x: "Izquierda", y: 5}, { x: "Derecha", y: 0}]
+          data: [{ x: "Izquierda", y: 5}, { x: "Derecha", y: 1}]
         }
       ],
       chart: {
@@ -127,6 +127,15 @@ export class GraphComponent implements OnInit {
         text: "HeatMap Chart (Single color)"
       }
     };
+
+    const { user: { age, gender, province }, respuestas } = this.triviaService;
+    const dataForAnalysis = {
+      localidad: province,
+      edad: age,
+      genero: gender,
+      respuestas: respuestas.join(",")
+    };
+    console.log(dataForAnalysis)
   }  
 
    scatterChartOptions: ChartOptions = {
