@@ -4,6 +4,7 @@ import { TriviaService } from '../trivia_service/trivia.service';
 import { AppComponent } from '../../app.component';
 
 import { GoogleChartsModule } from 'angular-google-charts';
+import { HttpClient } from '@angular/common/http';
 
 import {
   ApexAxisChartSeries,
@@ -20,6 +21,19 @@ export type ApexChartOptions = {
   title: ApexTitleSubtitle;
   colors: any;
 };
+
+interface RoundResult {
+  localidad: String,
+  edad: String,
+  genero: String,
+  respuestas: String,
+  posicion_x: number,
+  posicion_y: number
+}
+
+interface RoundResultList {
+  data: [ RoundResult ]
+}
 
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -129,7 +143,7 @@ export class GraphComponent implements OnInit {
     };
 
     const { user: { age, gender, province }, respuestas } = this.triviaService;
-    const dataForAnalysis = {
+    const roundResult = {
       localidad: province,
       edad: age,
       genero: gender,
@@ -137,7 +151,14 @@ export class GraphComponent implements OnInit {
       posicion_x: this.posX,
       posicion_y: this.posY
     };
-    console.log(dataForAnalysis)
+
+    if (respuestas.length > 0)
+      this.http.post<RoundResult>('https://content.merepresenta.info/items/respuestasvf', roundResult, { headers: { "Authorization": "Bearer iKETGevoDyRC6o8sVK3sWp8Tr8pKn5TW" } })
+      .subscribe()
+
+    this.http.get<RoundResultList>('https://content.merepresenta.info/items/respuestasvf').subscribe(({ data }) => {
+        console.log({data})
+    })
   }
 
   ngOnDestroy() {
@@ -246,7 +267,7 @@ export class GraphComponent implements OnInit {
       backgroundColor: "#ffffff"
     }]
 
-  constructor(private triviaService:TriviaService,private _router: Router, @Inject(AppComponent) private parent: AppComponent) { 
+  constructor(private triviaService:TriviaService,private _router: Router, @Inject(AppComponent) private parent: AppComponent, private http: HttpClient) { 
     //this.posX=triviaService.trivia.PositionX;
     //this.posY=triviaService.trivia.PositionY; 
     //(this.scatterChartData[0].data as number[]).push(this.posX,this.posY);
