@@ -133,10 +133,16 @@ export class GraphComponent implements OnInit {
       localidad: province,
       edad: age,
       genero: gender,
-      respuestas: respuestas.join(",")
+      respuestas: respuestas.join(","),
+      posicion_x: this.posX,
+      posicion_y: this.posY
     };
     console.log(dataForAnalysis)
-  }  
+  }
+
+  ngOnDestroy() {
+    this.triviaService.respuestas = [];
+  }
 
    scatterChartOptions: ChartOptions = {
     responsive: true,
