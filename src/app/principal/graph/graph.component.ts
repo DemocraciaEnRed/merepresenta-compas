@@ -1,3 +1,4 @@
+import * as _  from "lodash";
 import { Component, Input, OnInit, Inject, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TriviaService } from '../trivia_service/trivia.service';
@@ -11,7 +12,8 @@ import {
   ApexTitleSubtitle,
   ApexDataLabels,
   ApexChart,
-  ChartComponent
+  ChartComponent,
+  ApexTooltip
 } from "ng-apexcharts";
 
 export type ApexChartOptions = {
@@ -19,7 +21,9 @@ export type ApexChartOptions = {
   chart: ApexChart;
   dataLabels: ApexDataLabels;
   title: ApexTitleSubtitle;
+  subtitle: ApexTitleSubtitle;
   colors: any;
+  tooltip: ApexTooltip;
 };
 
 interface RoundResult {
@@ -34,6 +38,8 @@ interface RoundResult {
 interface RoundResultList {
   data: [ RoundResult ]
 }
+
+const defaultHeatmapValue = 0.5;
 
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -51,6 +57,9 @@ export class GraphComponent implements OnInit {
   titulo_resultado:String ='HOLA';
   descripcion_resultado:String ='Holaaa';
   categorias: CategoriaResultado[]=[];
+  heatmapResults: number[][] = new Array(4)
+    .fill(defaultHeatmapValue)
+    .map(() => new Array(4).fill(defaultHeatmapValue));
 
   @ViewChild("chart")
   chart: ChartComponent = new ChartComponent;
@@ -119,27 +128,32 @@ export class GraphComponent implements OnInit {
     }
 
     this.chartOptions = {
-      series: [
-        {
-          name: "Liberal",
-          data: [{ x: "Izquierda", y: 2}, { x: "Derecha", y: 1}]
-        },
-        {
-          name: "Populista",
-          data: [{ x: "Izquierda", y: 5}, { x: "Derecha", y: 1}]
-        }
-      ],
+      series: [],
       chart: {
         height: 350,
-        type: "heatmap"
+        width: 350,
+        type: "heatmap",
+        toolbar: {
+          show: false
+        }
       },
       dataLabels: {
         enabled: false
       },
       colors: ["#008FFB"],
       title: {
-        text: "HeatMap Chart (Single color)"
-      }
+        text: "Mapa de calor",
+        
+        align: "center"
+      },
+      subtitle: {
+        text: "¡Mirá cómo le fue al resto!",
+        
+        align: "center"
+      },
+      tooltip: {
+        enabled: false
+      },
     };
 
     const { user: { age, gender, province }, respuestas } = this.triviaService;
@@ -156,8 +170,50 @@ export class GraphComponent implements OnInit {
       this.http.post<RoundResult>('https://content.merepresenta.info/items/respuestasvf', roundResult, { headers: { "Authorization": "Bearer iKETGevoDyRC6o8sVK3sWp8Tr8pKn5TW" } })
       .subscribe()
 
-    this.http.get<RoundResultList>('https://content.merepresenta.info/items/respuestasvf').subscribe(({ data }) => {
-        console.log({data})
+    const axisLength = 200;
+    const divisions = 4;
+    const increment = axisLength / divisions;
+    let matrixBounds: any = [];
+
+    for (let i = 0; i < divisions ; i++) {
+      for (let j = 0; j < divisions ; j++) {
+        matrixBounds.push({
+          bounds: {
+            minX: increment * (j - 2),
+            maxX: increment * (j - 1),
+            minY: increment * (1 - i),
+            maxY: increment * (2 - i)
+          },
+          spot: {
+            horizontal: i,
+            vertical: j
+          }
+        });
+      }
+    }
+
+    this.http.get<RoundResultList>('https://content.merepresenta.info/items/respuestasvf').subscribe(({ data = [] }) => {
+      data.forEach(({ posicion_x, posicion_y }) => {
+        const { spot: { horizontal, vertical } } = _.find(matrixBounds, ({ bounds: { minX, maxX, minY, maxY } }) => posicion_x >= minX && posicion_x <= maxX && posicion_y >= minY && posicion_y <= maxY) || { spot: { horizontal: 0, vertical: 0} };
+        const line = this.heatmapResults[horizontal];
+        line[vertical]++;
+      })
+      
+      console.log({ heatmapResults: this.heatmapResults })
+
+      this.chartOptions = {
+        series: _(this.heatmapResults).map((horizontalResults, horizontal) => ({
+            name: horizontal == 1? "Liberal" : horizontal == 2? "Populista" : " ",
+            data: _.map(horizontalResults, (value, vertical) => ({
+              x: vertical == 1? "Izquierda" : vertical == 2? "Derecha": " ",
+              y: value
+            }))
+          })
+        )
+        .reverse()
+        .value(),
+        ..._.omit(this.chartOptions, "series")
+      };
     })
   }
 

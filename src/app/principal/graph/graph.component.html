@@ -61,13 +61,15 @@
       </cdk-accordion-item>
     </cdk-accordion>
 
-    <div id="chart">
+    <div id="chart" *ngIf="chartOptions.series.length">
       <apx-chart
         [series]="chartOptions.series"
         [chart]="chartOptions.chart"
         [dataLabels]="chartOptions.dataLabels"
         [title]="chartOptions.title"
+        [subtitle]="chartOptions.subtitle"
         [colors]="chartOptions.colors"
+        [tooltip]="chartOptions.tooltip"
       ></apx-chart>
     </div>
 
