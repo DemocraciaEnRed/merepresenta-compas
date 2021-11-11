@@ -149,7 +149,7 @@ export class GraphComponent implements OnInit {
         align: "center"
       },
       subtitle: {
-        text: "¡Mirá donde se encuadra el resto!",
+        text: "¡Mirá dónde se encuadra el resto!",
         align: "center"
       },
       tooltip: {
