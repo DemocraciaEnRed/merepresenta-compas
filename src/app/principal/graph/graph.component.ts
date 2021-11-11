@@ -13,7 +13,8 @@ import {
   ApexDataLabels,
   ApexChart,
   ChartComponent,
-  ApexTooltip
+  ApexTooltip,
+  ApexResponsive
 } from "ng-apexcharts";
 
 export type ApexChartOptions = {
@@ -24,6 +25,7 @@ export type ApexChartOptions = {
   subtitle: ApexTitleSubtitle;
   colors: any;
   tooltip: ApexTooltip;
+  responsive: [ApexResponsive];
 };
 
 interface RoundResult {
@@ -39,7 +41,7 @@ interface RoundResultList {
   data: [ RoundResult ]
 }
 
-const defaultHeatmapValue = 0.5;
+const defaultHeatmapValue = 0.2;
 
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -130,8 +132,8 @@ export class GraphComponent implements OnInit {
     this.chartOptions = {
       series: [],
       chart: {
-        height: 350,
-        width: 350,
+        height: 450,
+        width: 450,
         type: "heatmap",
         toolbar: {
           show: false
@@ -140,20 +142,30 @@ export class GraphComponent implements OnInit {
       dataLabels: {
         enabled: false
       },
-      colors: ["#008FFB"],
+      colors: ["#575656"],
       title: {
-        text: "Mapa de calor",
+        text: "Mapa de calor de respuestas",
         
         align: "center"
       },
       subtitle: {
-        text: "¡Mirá cómo le fue al resto!",
-        
+        text: "¡Mirá donde se encuadra el resto!",
         align: "center"
       },
       tooltip: {
         enabled: false
       },
+      responsive: [
+        {
+          breakpoint: 400,
+          options: {
+            chart: {  
+              height: 400,
+              width: 400
+            }
+          }
+        }
+      ]
     };
 
     const { user: { age, gender, province }, respuestas } = this.triviaService;
@@ -201,20 +213,21 @@ export class GraphComponent implements OnInit {
       
       console.log({ heatmapResults: this.heatmapResults })
 
-      this.chartOptions = {
-        series: _(this.heatmapResults).map((horizontalResults, horizontal) => ({
-            name: horizontal == 1? "Liberal" : horizontal == 2? "Populista" : " ",
-            data: _.map(horizontalResults, (value, vertical) => ({
-              x: vertical == 1? "Izquierda" : vertical == 2? "Derecha": " ",
-              y: value
-            }))
-          })
-        )
-        .reverse()
-        .value(),
-        ..._.omit(this.chartOptions, "series")
-      };
-    })
+      if (!_.isEmpty(data))
+        this.chartOptions = {
+          series: _(this.heatmapResults).map((horizontalResults, horizontal) => ({
+              name: horizontal == 0? "LIBERAL" : horizontal == 3? "POPULISTA" : " ",
+              data: _.map(horizontalResults, (value, vertical) => ({
+                x: vertical == 0? "IZQUIERDA" : vertical == 3? "DERECHA": " ",
+                y: value
+              }))
+            })
+          )
+          .reverse()
+          .value(),
+          ..._.omit(this.chartOptions, "series")
+        };
+      })
   }
 
   ngOnDestroy() {
