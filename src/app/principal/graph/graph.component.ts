@@ -216,7 +216,7 @@ export class GraphComponent implements OnInit {
       if (!_.isEmpty(data))
         this.chartOptions = {
           series: _(this.heatmapResults).map((horizontalResults, horizontal) => ({
-              name: horizontal == 0? "LIBERAL" : horizontal == 3? "POPULISTA" : " ",
+              name: horizontal == 0? "POPULISTA" : horizontal == 3? "LIBERAL" : " ",
               data: _.map(horizontalResults, (value, vertical) => ({
                 x: vertical == 0? "IZQUIERDA" : vertical == 3? "DERECHA": " ",
                 y: value
