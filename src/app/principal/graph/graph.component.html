@@ -61,6 +61,19 @@
       </cdk-accordion-item>
     </cdk-accordion>
 
+    <div id="chart" *ngIf="chartOptions.series.length">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [title]="chartOptions.title"
+        [subtitle]="chartOptions.subtitle"
+        [colors]="chartOptions.colors"
+        [tooltip]="chartOptions.tooltip"
+        [responsive]="chartOptions.responsive"
+      ></apx-chart>
+    </div>
+
     <!--<p class="title_text_graph">{{titulo_resultado}}</p>
     <p class="description_text_graph">{{descripcion_resultado}}</p>-->
   </div>

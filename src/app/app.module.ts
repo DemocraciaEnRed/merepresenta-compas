@@ -29,7 +29,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     PrincipalModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    GoogleChartsModule,
+    GoogleChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

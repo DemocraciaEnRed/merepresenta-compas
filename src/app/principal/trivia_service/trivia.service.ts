@@ -23,6 +23,7 @@ export class TriviaService {
 
   PreguntaUsuarioEnCurso?: PreguntaUsuario;
   ordenPreguntaUsuario:number=0;
+  respuestas: number[] = [];
   
   constructor() { 
     this.trivia.cuestionario=Cuestionario;
@@ -56,6 +57,7 @@ export class TriviaService {
     else{
       this.trivia.PositionY+=score;
     }
+    this.respuestas = this.respuestas.concat(optionChoiced);
   }
 
 }

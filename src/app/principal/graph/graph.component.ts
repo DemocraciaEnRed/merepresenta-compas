@@ -1,9 +1,47 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import * as _  from "lodash";
+import { Component, Input, OnInit, Inject, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TriviaService } from '../trivia_service/trivia.service';
 import { AppComponent } from '../../app.component';
 
 import { GoogleChartsModule } from 'angular-google-charts';
+import { HttpClient } from '@angular/common/http';
+
+import {
+  ApexAxisChartSeries,
+  ApexTitleSubtitle,
+  ApexDataLabels,
+  ApexChart,
+  ChartComponent,
+  ApexTooltip,
+  ApexResponsive
+} from "ng-apexcharts";
+
+export type ApexChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  title: ApexTitleSubtitle;
+  subtitle: ApexTitleSubtitle;
+  colors: any;
+  tooltip: ApexTooltip;
+  responsive: [ApexResponsive];
+};
+
+interface RoundResult {
+  localidad: String,
+  edad: String,
+  genero: String,
+  respuestas: String,
+  posicion_x: number,
+  posicion_y: number
+}
+
+interface RoundResultList {
+  data: [ RoundResult ]
+}
+
+const defaultHeatmapValue = 0.2;
 
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -21,9 +59,15 @@ export class GraphComponent implements OnInit {
   titulo_resultado:String ='HOLA';
   descripcion_resultado:String ='Holaaa';
   categorias: CategoriaResultado[]=[];
+  heatmapResults: number[][] = new Array(4)
+    .fill(defaultHeatmapValue)
+    .map(() => new Array(4).fill(defaultHeatmapValue));
+
+  @ViewChild("chart")
+  chart: ChartComponent = new ChartComponent;
+  chartOptions!: ApexChartOptions;
 
   ngOnInit(): void {
-
     this.posX= this.triviaService.trivia.PositionX / 30 * 100;
     this.posY= this.triviaService.trivia.PositionY / 30 * 100;
     console.log(this.posX,this.posY);
@@ -84,7 +128,111 @@ export class GraphComponent implements OnInit {
         this.categorias[3].selected=false;
         this.categorias[1].selected=false;
     }
-  }  
+
+    this.chartOptions = {
+      series: [],
+      chart: {
+        height: 450,
+        width: 450,
+        type: "heatmap",
+        toolbar: {
+          show: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      colors: ["#575656"],
+      title: {
+        text: "Mapa de calor de respuestas",
+        
+        align: "center"
+      },
+      subtitle: {
+        text: "¡Mirá dónde se encuadra el resto!",
+        align: "center"
+      },
+      tooltip: {
+        enabled: false
+      },
+      responsive: [
+        {
+          breakpoint: 400,
+          options: {
+            chart: {  
+              height: 400,
+              width: 400
+            }
+          }
+        }
+      ]
+    };
+
+    const { user: { age, gender, province }, respuestas } = this.triviaService;
+    const roundResult = {
+      localidad: province,
+      edad: age,
+      genero: gender,
+      respuestas: respuestas.join(","),
+      posicion_x: this.posX,
+      posicion_y: this.posY
+    };
+
+    if (respuestas.length > 0)
+      this.http.post<RoundResult>('https://content.merepresenta.info/items/respuestasvf', roundResult, { headers: { "Authorization": "Bearer iKETGevoDyRC6o8sVK3sWp8Tr8pKn5TW" } })
+      .subscribe()
+
+    const axisLength = 200;
+    const divisions = 4;
+    const increment = axisLength / divisions;
+    let matrixBounds: any = [];
+
+    for (let i = 0; i < divisions ; i++) {
+      for (let j = 0; j < divisions ; j++) {
+        matrixBounds.push({
+          bounds: {
+            minX: increment * (j - 2),
+            maxX: increment * (j - 1),
+            minY: increment * (1 - i),
+            maxY: increment * (2 - i)
+          },
+          spot: {
+            horizontal: i,
+            vertical: j
+          }
+        });
+      }
+    }
+
+    this.http.get<RoundResultList>('https://content.merepresenta.info/items/respuestasvf').subscribe(({ data = [] }) => {
+      data.forEach(({ posicion_x, posicion_y }) => {
+        const { spot: { horizontal, vertical } } = _.find(matrixBounds, ({ bounds: { minX, maxX, minY, maxY } }) => posicion_x >= minX && posicion_x <= maxX && posicion_y >= minY && posicion_y <= maxY) || { spot: { horizontal: 0, vertical: 0} };
+        const line = this.heatmapResults[horizontal];
+        line[vertical]++;
+      })
+      
+      console.log({ heatmapResults: this.heatmapResults })
+
+      if (!_.isEmpty(data))
+        this.chartOptions = {
+          series: _(this.heatmapResults).map((horizontalResults, horizontal) => ({
+              name: horizontal == 0? "LIBERAL" : horizontal == 3? "POPULISTA" : " ",
+              data: _.map(horizontalResults, (value, vertical) => ({
+                x: vertical == 0? "IZQUIERDA" : vertical == 3? "DERECHA": " ",
+                y: value
+              }))
+            })
+          )
+          .reverse()
+          .value(),
+          ..._.omit(this.chartOptions, "series")
+        };
+      })
+  }
+
+  ngOnDestroy() {
+    this.triviaService.respuestas = [];
+  }
 
    scatterChartOptions: ChartOptions = {
     responsive: true,
@@ -188,11 +336,10 @@ export class GraphComponent implements OnInit {
       backgroundColor: "#ffffff"
     }]
 
-  constructor(private triviaService:TriviaService,private _router: Router, @Inject(AppComponent) private parent: AppComponent) { 
+  constructor(private triviaService:TriviaService,private _router: Router, @Inject(AppComponent) private parent: AppComponent, private http: HttpClient) { 
     //this.posX=triviaService.trivia.PositionX;
     //this.posY=triviaService.trivia.PositionY; 
     //(this.scatterChartData[0].data as number[]).push(this.posX,this.posY);
-
   }
 
    // events

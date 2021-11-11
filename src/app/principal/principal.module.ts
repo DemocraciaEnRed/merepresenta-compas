@@ -19,6 +19,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { GoogleChartsModule } from 'angular-google-charts';
 import {MatIconModule} from '@angular/material/icon';
+import { NgApexchartsModule } from "ng-apexcharts";
+
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -47,6 +50,8 @@ import {MatIconModule} from '@angular/material/icon';
     GoogleChartsModule,
     MatIconModule,
     CdkAccordionModule,
+    NgApexchartsModule,
+    HttpClientModule
   ]
 })
 export class PrincipalModule { }
