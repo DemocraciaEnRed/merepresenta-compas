@@ -1,0 +1,498 @@
+
+
+.mat-dialog-actions{
+    justify-content: center;
+}
+
+.mat-icon{
+    cursor: pointer;
+}
+
+.icono_merepresenta_toolbar{
+    filter: brightness(0.0);
+    margin-left: 10px;
+}
+
+.close-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+.header-wrapper{
+    padding: 18px 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.title{
+    margin-left: 5px;
+    font: 500 26px/32px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+}
+
+.whatsapp-button{
+    display: flex;
+    align-items: center;
+    display: none;
+    background-color: #32F991!important;
+}
+.whatsapp-button img{
+    width: 33px;
+
+}
+
+.twitter-button{
+    display: flex;
+    align-items: center;
+    display: none;
+    background-color: #4BD6F7!important;
+}
+.twitter-button img{
+    width: 33px;
+
+}
+
+.image-button{
+    display: flex;
+    align-items: center;
+    display: none;
+    background-color: rgb(118, 118, 118)!important;
+}
+.image-button img{
+    width: 33px;
+
+}
+
+.graph {
+    width: 80%;
+    max-height: 500px;
+    margin: 0 auto 16px;
+}
+
+.graph_canvas {
+    width: 100%;
+    height: auto;
+    max-width: 80%;
+    max-height: 450px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.rotulos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+@media screen and (max-width: 768px) {
+    .mat-dialog-actions {
+        padding: 8px;
+    }
+    .mat-dialog-actions button{
+        padding: 0;
+        flex: 1;
+    }
+}
+
+::ng-deep .custom-dialog-container .mat-dialog-container {
+    padding: 0;
+    border-radius: 10px;
+}
+
+/* dialig link */
+.dialog-link{
+    color: #fff;
+    padding-bottom: 2px;
+    position: relative;
+}
+
+::ng-deep .dialog-link .content-dialog-link{
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    border: 1px solid #000;
+    border-radius: 10px;
+    color: #000;
+    background-color: #fff;
+}
+
+::ng-deep .dialog-link  .content-dialog-link > code{
+    
+    padding: 10px 15px;
+    width: 95%;
+    border-right: 1px solid #000;
+    
+}
+
+::ng-deep .dialog-link .content-dialog-link.mat-dialog-content{
+    padding: 0;
+}
+
+
+::ng-deep .dialog-link .content-dialog-link > mat-icon{
+    padding: 10px 15px;
+
+}
+
+::ng-deep .dialog-link .close-content{
+    margin: 24px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+::ng-deep .dialog-link .close-content h1{
+    font-family: 'Nippo-Medium';
+    font-size: 1.2rem;
+}
+
+::ng-deep .dialog-link .header-wrapper{
+    background-color: #00000033;
+}
+
+::ng-deep .dialog-link .icono_merepresenta_toolbar{
+    filter: brightness(1);
+}
+
+::ng-deep .dialog-link hr {
+    height: 1px;
+    background-color: #fff;
+    z-index: 1;
+    position: relative;
+    margin-top: 0;
+}
+
+::ng-deep .dialog-link .background-img{
+    top: 0;
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+::ng-deep .dialog-link .mat-button{
+    background-color: #fff;
+    border: 1px solid #000 ;
+    border-radius: 30px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 0 4rem;
+    
+}
+
+::ng-deep .dialog-link .mat-dialog-actions{
+    margin: 16px 0 1px 0;
+}
+
+/* dialog whatsapp */
+.dialog-whatsapp{
+    color: #000;
+    padding-bottom: 2px;
+    position: relative;
+}
+::ng-deep .dialog-whatsapp .content-dialog-whatsapp{
+    background-image: url('../../../../assets/imgs/Fondo2.svg');
+    background-size: cover;
+    padding: 0;
+    padding-top: 24px;
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    border: 5px solid #000;
+    border-radius: 10px;
+    color: #000;
+    background-color: #fff;
+}
+
+
+::ng-deep .dialog-whatsapp .content-dialog-whatsapp > mat-icon{
+    padding: 10px 15px;
+
+}
+
+::ng-deep .dialog-whatsapp .description{
+    padding: 16px;
+    border-top: 1px solid #000;
+    background-color: #fff;
+
+}
+
+::ng-deep .dialog-whatsapp .close-content{
+    margin-top: 24px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+::ng-deep .dialog-whatsapp .close-content h1{
+    font-family: 'Nippo-Medium';
+    font-size: 1.2rem;
+}
+
+::ng-deep .dialog-whatsapp .header-wrapper{
+    color: #000;
+}
+
+::ng-deep .dialog-whatsapp hr {
+    height: 1px;
+    background-color: #fff;
+    z-index: 1;
+    position: relative;
+    margin-top: 0;
+}
+
+::ng-deep .dialog-whatsapp .background-img{
+    display: none;
+    top: 0;
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+::ng-deep .dialog-whatsapp .mat-button{
+    background-color: #fff;
+    border: 1px solid #000 ;
+    border-radius: 30px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 0 4rem;
+    
+}
+
+
+
+
+::ng-deep .dialog-whatsapp  .whatsapp-button{
+    display: block;
+}
+
+::ng-deep .dialog-whatsapp .mat-dialog-actions{
+    margin: 16px 0 1px 0;
+}
+@media screen and (max-width: 768px){
+    ::ng-deep .dialog-whatsapp .close-content{
+        margin-top: 8px;
+        padding: 0 8px;
+    }
+    ::ng-deep .dialog-whatsapp  .content-dialog-whatsapp{
+        width: auto;
+        
+    }
+}
+
+
+/* dialog twitter */
+.dialog-twitter{
+    color: #000;
+    padding-bottom: 2px;
+    position: relative;
+}
+::ng-deep .dialog-twitter .content-dialog-twitter{
+    background-image: url('../../../../assets/imgs/Fondo2.svg');
+    background-size: cover;
+    padding: 0;
+    padding-top: 24px;
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    border: 5px solid #000;
+    border-radius: 10px;
+    color: #000;
+    background-color: #fff;
+}
+
+
+::ng-deep .dialog-twitter .content-dialog-twitter > mat-icon{
+    padding: 10px 15px;
+
+}
+
+::ng-deep .dialog-twitter .description{
+    padding: 16px;
+    border-top: 1px solid #000;
+    background-color: #fff;
+
+}
+
+::ng-deep .dialog-twitter .close-content{
+    margin-top: 24px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+::ng-deep .dialog-twitter .close-content h1{
+    font-family: 'Nippo-Medium';
+    font-size: 1.2rem;
+}
+
+::ng-deep .dialog-twitter .header-wrapper{
+    color: #000;
+}
+
+::ng-deep .dialog-twitter hr {
+    height: 1px;
+    background-color: #fff;
+    z-index: 1;
+    position: relative;
+    margin-top: 0;
+}
+
+::ng-deep .dialog-twitter .background-img{
+    display: none;
+    top: 0;
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+::ng-deep .dialog-twitter .mat-button{
+    background-color: #fff;
+    border: 1px solid #000 ;
+    border-radius: 30px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 0 4rem;
+    
+}
+
+
+
+
+::ng-deep .dialog-twitter  .twitter-button{
+    display: block;
+}
+
+::ng-deep .dialog-twitter .mat-dialog-actions{
+    margin: 16px 0 1px 0;
+}
+@media screen and (max-width: 768px){
+    ::ng-deep .dialog-twitter .close-content{
+        margin-top: 8px;
+        padding: 0 8px;
+    }
+    ::ng-deep .dialog-twitter  .content-dialog-twitter{
+        width: auto;
+        
+    }
+}
+
+
+/* dialog whatsapp */
+.dialog-image{
+    color: #000;
+    padding-bottom: 2px;
+    position: relative;
+}
+::ng-deep .dialog-image .content-dialog-image{
+    padding: 8px;
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    color: #000;
+    background-color: #fff;
+}
+
+::ng-deep .dialog-image .content{
+    background-image: url('../../../../assets/imgs/Fondo2.svg');
+    background-size: cover;
+    padding-top: 24px;
+    height: fit-content;
+    border-radius: 10px;
+    border: 5px solid #000;
+    
+}
+
+::ng-deep .dialog-image .content-dialog-image > mat-icon{
+    padding: 10px 15px;
+
+}
+
+::ng-deep .dialog-image .description{
+    padding: 16px;
+    border-top: 1px solid #000;
+    background-color: #fff;
+
+}
+
+::ng-deep .dialog-image .close-content{
+    margin-top: 24px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+::ng-deep .dialog-image .close-content h1{
+    font-family: 'Nippo-Medium';
+    font-size: 1.2rem;
+}
+
+::ng-deep .dialog-image .header-wrapper{
+    color: #000;
+}
+
+::ng-deep .dialog-image hr {
+    height: 1px;
+    background-color: #fff;
+    z-index: 1;
+    position: relative;
+    margin-top: 0;
+}
+
+::ng-deep .dialog-image .background-img{
+    display: none;
+    top: 0;
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+::ng-deep .dialog-image .mat-button{
+    background-color: #fff;
+    border: 1px solid #000 ;
+    border-radius: 30px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 0 4rem;
+    
+}
+
+
+
+
+::ng-deep .dialog-image  .image-button{
+    display: block;
+}
+
+::ng-deep .dialog-image .mat-dialog-actions{
+    margin: 16px 0 1px 0;
+}
+
+.dialog-image-wrapper, .dialog-whatsapp-wrapper, .dialog-twitter-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions{
+    padding: 16px;
+}
+@media screen and (max-width: 768px){
+    ::ng-deep .dialog-image .close-content{
+        margin-top: 8px;
+        padding: 0 8px;
+    }
+    ::ng-deep .dialog-image  .content-dialog-image{
+        width: auto;
+        
+    }
+}

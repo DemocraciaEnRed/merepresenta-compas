@@ -1,0 +1,21 @@
+<section [attr.class]="'dialog-' + data.typeComponent.toLocaleLowerCase()">
+    <div style="background-image: url('../../../../assets/imgs/Fondo3.svg')" class="background-img"> </div>
+    <div class="header-wrapper">
+        <div class="close-header">
+            <div class="logo">
+                <img class="icono_merepresenta_toolbar" src="../../../../assets/imgs/MeRepresentaIcon.png">
+                <span class="title">MeRepresenta</span>
+            </div>
+
+            <mat-icon (click)="onNoClick()" aria-hidden="false" aria-label="close icon">close</mat-icon>
+
+        </div>
+
+    </div>
+    <hr />
+    <div class="close-content">
+        <h1 mat-dialog-title>{{ data.title }}</h1>
+        <ng-container *ngComponentOutlet="data.component"></ng-container>
+
+    </div>
+</section>

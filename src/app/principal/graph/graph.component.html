@@ -60,7 +60,17 @@
         </div>
       </cdk-accordion-item>
     </cdk-accordion>
-
+    <div class="share">
+      <h1 class="title-share">Compartí tu resultado en Redes sociales</h1>
+      
+      
+      <div style="text-align: center;">
+        <button mat-button (click)="openDialog('Twitter')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/twitter.png"></button>
+        <button mat-button (click)="openDialog('Whatsapp')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/whatsapp.png"></button>
+        <button mat-button (click)="openDialog('Link')" class="button_img_redes" [attr.href]="'/chart?X='+ posX + '&Y='+posY" target="_blank"><img class=" shared-img" src="./../../../assets/imgs/shared-link.png"></button>
+        <!-- <button mat-button (click)="openDialog('Image')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/shared-img.png"></button> -->
+    </div>
+    </div>
     <div id="chart" *ngIf="chartOptions.series.length">
       <apx-chart
         [series]="chartOptions.series"

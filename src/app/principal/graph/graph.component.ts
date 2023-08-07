@@ -1,8 +1,11 @@
 import * as _  from "lodash";
-import { Component, Input, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TriviaService } from '../trivia_service/trivia.service';
 import { AppComponent } from '../../app.component';
+import { MatIconModule } from '@angular/material/icon';
+import {MatDialog} from '@angular/material/dialog';
+
 
 import { GoogleChartsModule } from 'angular-google-charts';
 import { HttpClient } from '@angular/common/http';
@@ -46,16 +49,23 @@ const defaultHeatmapValue = 0.2;
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { CategoriaResultado } from 'src/app/models/trivia';
+import { DialogShared } from "./dialogs/dialog.component";
+import { TwitterDialogComponent, WhatsappDialogComponent,/* ImageDialogComponent, */LinkDialogComponent } from "./dialogs/dinamic-dialog.component";
+
+type ComponentType = 'Twitter' | 'Whatsapp' | 'Link';
+
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
-  styleUrls: ['./graph.component.css']
+  styleUrls: ['./graph.component.css'],
+
 })
 export class GraphComponent implements OnInit { 
   posX:number=0;
   posY:number=0;
-  
+  otherResults:object[]=[]
+
   titulo_resultado:String ='HOLA';
   descripcion_resultado:String ='Holaaa';
   categorias: CategoriaResultado[]=[];
@@ -67,10 +77,97 @@ export class GraphComponent implements OnInit {
   chart: ChartComponent = new ChartComponent;
   chartOptions!: ApexChartOptions;
 
+  openDialog(typeComponent: ComponentType,) {
+    
+    /* const createImageFromGraph = ()=>{
+      const 
+    } */
+    
+    const componentMap = {
+      Twitter: {title:`Compartí tu resultado por twitter con tus amigues`,component:TwitterDialogComponent},
+      Whatsapp: {title:`Compartí tu resultado por whatsapp con tus amigues`,component:WhatsappDialogComponent},
+      //Image: {title:`copia este ${typeComponent} para compartir con los demas`,component:ImageDialogComponent},
+      Link: {title:`Copia y pega este link para compartir tu resultado con amigues`,component:LinkDialogComponent},
+    };
+    const dinamycComponent = componentMap[typeComponent]
+    
+    this.dialog.open(DialogShared, {
+      panelClass: `custom-dialog-container`,
+      maxWidth: '95vw',
+      maxHeight:  '90vh',
+
+      data: {
+        title: dinamycComponent.title, 
+        typeComponent,
+        posX:this.posX,
+        posY:this.posY,
+        results:this,
+        resultString: `${this.posY > 0? "populista" : "liberal"} de ${this.posX > 0? "derecha" : "izquierda"}`,
+        component: dinamycComponent.component
+      },
+    });
+  }
+
   ngOnInit(): void {
-    this.posX= this.triviaService.trivia.PositionX / 30 * 100;
-    this.posY= this.triviaService.trivia.PositionY / 30 * 100;
-    console.log(this.posX,this.posY);
+    let x: number
+    let y: number
+
+
+    x = this.triviaService.trivia.PositionX / 30 * 100
+    y = this.triviaService.trivia.PositionY / 30 * 100
+
+    this.route.queryParams.subscribe(params => {
+
+      if (Object.keys(params).length === 2) {
+        if (Object.keys(params).includes('X') && Object.keys(params).includes('Y')) {
+          x = params.X
+          y = params.Y
+        }
+      }
+    })
+
+    
+    this.http.get<RoundResultList>('https://content.merepresenta.info/items/respuestasvf').subscribe(({ data = [] }) => {
+      data.forEach(({ posicion_x, posicion_y }) => {
+        const { spot: { horizontal, vertical } } = _.find(matrixBounds, ({ bounds: { minX, maxX, minY, maxY } }) => posicion_x >= minX && posicion_x <= maxX && posicion_y >= minY && posicion_y <= maxY) || { spot: { horizontal: 0, vertical: 0} };
+        const line = this.heatmapResults[horizontal];
+        
+        line[vertical]++;
+        this.otherResults.push({x: posicion_x as number,y: posicion_y as number})
+      })
+      
+
+      if (!_.isEmpty(data))
+        this.chartOptions = {
+          series: _(this.heatmapResults).map((horizontalResults, horizontal) => ({
+              name: horizontal == 0? "POPULISTA" : horizontal == 3? "LIBERAL" : " ",
+              data: _.map(horizontalResults, (value, vertical) => ({
+                x: vertical == 0? "IZQUIERDA" : vertical == 3? "DERECHA": " ",
+                y: value
+              }))
+            })
+          )
+          .reverse()
+          .value(),
+          ..._.omit(this.chartOptions, "series")
+        };
+
+        this.scatterChartData.push(
+          {
+            data: [
+              ...this.otherResults,
+            ],
+            label: '',
+            pointRadius: 5,
+            pointBackgroundColor:'#ff000069',
+            pointBorderColor:'transparent'
+          },
+        );
+      })
+    
+
+    this.posX = x ;
+    this.posY = y ;
 
     this.categorias=this.triviaService.categorias;
     this.categorias[3].selected=false;
@@ -204,30 +301,7 @@ export class GraphComponent implements OnInit {
       }
     }
 
-    this.http.get<RoundResultList>('https://content.merepresenta.info/items/respuestasvf').subscribe(({ data = [] }) => {
-      data.forEach(({ posicion_x, posicion_y }) => {
-        const { spot: { horizontal, vertical } } = _.find(matrixBounds, ({ bounds: { minX, maxX, minY, maxY } }) => posicion_x >= minX && posicion_x <= maxX && posicion_y >= minY && posicion_y <= maxY) || { spot: { horizontal: 0, vertical: 0} };
-        const line = this.heatmapResults[horizontal];
-        line[vertical]++;
-      })
       
-      console.log({ heatmapResults: this.heatmapResults })
-
-      if (!_.isEmpty(data))
-        this.chartOptions = {
-          series: _(this.heatmapResults).map((horizontalResults, horizontal) => ({
-              name: horizontal == 0? "POPULISTA" : horizontal == 3? "LIBERAL" : " ",
-              data: _.map(horizontalResults, (value, vertical) => ({
-                x: vertical == 0? "IZQUIERDA" : vertical == 3? "DERECHA": " ",
-                y: value
-              }))
-            })
-          )
-          .reverse()
-          .value(),
-          ..._.omit(this.chartOptions, "series")
-        };
-      })
   }
 
   ngOnDestroy() {
@@ -336,7 +410,7 @@ export class GraphComponent implements OnInit {
       backgroundColor: "#ffffff"
     }]
 
-  constructor(private triviaService:TriviaService,private _router: Router, @Inject(AppComponent) private parent: AppComponent, private http: HttpClient) { 
+  constructor(private triviaService:TriviaService,private _router: Router,private route: ActivatedRoute, @Inject(AppComponent) private parent: AppComponent, private http: HttpClient, private dialog: MatDialog) { 
     //this.posX=triviaService.trivia.PositionX;
     //this.posY=triviaService.trivia.PositionY; 
     //(this.scatterChartData[0].data as number[]).push(this.posX,this.posY);

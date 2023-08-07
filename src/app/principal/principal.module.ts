@@ -4,6 +4,8 @@ import {RouterModule} from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 
 import {MatButtonModule} from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog'
+
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +24,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import { HttpClientModule } from '@angular/common/http';
+import { DialogShared } from './graph/dialogs/dialog.component';
+import {  LinkDialogComponent, TwitterDialogComponent, WhatsappDialogComponent } from './graph/dialogs/dinamic-dialog.component';
 
 
 @NgModule({
@@ -33,7 +37,11 @@ import { HttpClientModule } from '@angular/common/http';
     PreguntaComponent,
     DescriptionComponent,
     SurveyComponent,
-    GraphComponent
+    GraphComponent,
+    DialogShared,
+    LinkDialogComponent,
+    WhatsappDialogComponent,
+    TwitterDialogComponent,
   ],
   exports: [
     HeaderComponent,
@@ -51,7 +59,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     CdkAccordionModule,
     NgApexchartsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
+    
   ]
 })
 export class PrincipalModule { }
