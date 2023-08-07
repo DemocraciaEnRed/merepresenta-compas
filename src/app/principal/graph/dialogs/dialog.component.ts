@@ -20,7 +20,7 @@ export interface DialogData {
   @Component({
     selector: 'dialog-shared',
     templateUrl: 'dialog-shared-wrapper.html',
-    styleUrls: ['./dialog-styles.css'],
+    styleUrls: ['./dialog-styles.css','./dialog-link-styles.css','./dialog-whatsapp-styles.css','./dialog-twitter-styles.css'],
   })
   export class DialogShared {
 

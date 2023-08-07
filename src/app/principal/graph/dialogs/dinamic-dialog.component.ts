@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 @Component({
   selector: 'twitter-dialog-component',
   templateUrl: 'dialog-shared-twitter.html',
-  styleUrls: ['./dialog-styles.css']
+  styleUrls: ['./dialog-twitter-styles.css']
 
 })
 export class TwitterDialogComponent {
@@ -33,7 +33,7 @@ export class TwitterDialogComponent {
 @Component({
   selector: 'whatsatt-dialog-component',
   templateUrl: 'dialog-shared-whatsapp.html',
-  styleUrls: ['./dialog-styles.css']
+  styleUrls: ['./dialog-whatsapp-styles.css']
 })
 export class WhatsappDialogComponent {
   url = 'https://compaspolitico.merepresenta.info' + window.location.pathname + `?Y=${parseFloat(this.data.posY).toFixed(2)}%26X=${parseFloat(this.data.posX).toFixed(2)}`
@@ -61,7 +61,7 @@ export class WhatsappDialogComponent {
 @Component({
   selector: 'link-dialog-component',
   templateUrl: 'dialog-shared-link.html',
-  styleUrls: ['./dialog-styles.css']
+  styleUrls: ['./dialog-link-styles.css']
 })
 export class LinkDialogComponent {
   url = window.location.origin + window.location.pathname + `?Y=${parseFloat(this.data.posY).toFixed(2)}&X=${parseFloat(this.data.posX).toFixed(2)}`

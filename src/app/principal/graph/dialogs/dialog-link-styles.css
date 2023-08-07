@@ -108,3 +108,89 @@
     padding: 0;
     border-radius: 10px;
 }
+
+/* dialig link */
+.dialog-link{
+    color: #fff;
+    padding-bottom: 2px;
+    position: relative;
+}
+
+::ng-deep .dialog-link .content-dialog-link{
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    border: 1px solid #000;
+    border-radius: 10px;
+    color: #000;
+    background-color: #fff;
+}
+
+::ng-deep .dialog-link  .content-dialog-link > code{
+    
+    padding: 10px 15px;
+    width: 95%;
+    border-right: 1px solid #000;
+    
+}
+
+::ng-deep .dialog-link .content-dialog-link.mat-dialog-content{
+    padding: 0;
+}
+
+
+::ng-deep .dialog-link .content-dialog-link > mat-icon{
+    padding: 10px 15px;
+
+}
+
+::ng-deep .dialog-link .close-content{
+    margin: 24px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+::ng-deep .dialog-link .close-content h1{
+    font-family: 'Nippo-Medium';
+    font-size: 1.2rem;
+}
+
+::ng-deep .dialog-link .header-wrapper{
+    background-color: #00000033;
+}
+
+::ng-deep .dialog-link .icono_merepresenta_toolbar{
+    filter: brightness(1);
+}
+
+::ng-deep .dialog-link hr {
+    height: 1px;
+    background-color: #fff;
+    z-index: 1;
+    position: relative;
+    margin-top: 0;
+}
+
+::ng-deep .dialog-link .background-img{
+    top: 0;
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+::ng-deep .dialog-link .mat-button{
+    background-color: #fff;
+    border: 1px solid #000 ;
+    border-radius: 30px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 0 4rem;
+    
+}
+
+::ng-deep .dialog-link .mat-dialog-actions{
+    margin: 16px 0 1px 0;
+}

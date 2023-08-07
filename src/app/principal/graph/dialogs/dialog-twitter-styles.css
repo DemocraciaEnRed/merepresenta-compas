@@ -1,0 +1,97 @@
+/* dialog twitter */
+.dialog-twitter{
+    color: #000;
+    padding-bottom: 2px;
+    position: relative;
+}
+::ng-deep .dialog-twitter .content-dialog-twitter{
+    background-image: url('../../../../assets/imgs/Fondo2.svg');
+    background-size: cover;
+    padding: 0;
+    padding-top: 24px;
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    border: 5px solid #000;
+    border-radius: 10px;
+    color: #000;
+    background-color: #fff;
+}
+
+
+::ng-deep .dialog-twitter .content-dialog-twitter > mat-icon{
+    padding: 10px 15px;
+
+}
+
+::ng-deep .dialog-twitter .description{
+    padding: 16px;
+    border-top: 1px solid #000;
+    background-color: #fff;
+
+}
+
+::ng-deep .dialog-twitter .close-content{
+    margin-top: 24px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+::ng-deep .dialog-twitter .close-content h1{
+    font-family: 'Nippo-Medium';
+    font-size: 1.2rem;
+}
+
+::ng-deep .dialog-twitter .header-wrapper{
+    color: #000;
+}
+
+::ng-deep .dialog-twitter hr {
+    height: 1px;
+    background-color: #fff;
+    z-index: 1;
+    position: relative;
+    margin-top: 0;
+}
+
+::ng-deep .dialog-twitter .background-img{
+    display: none;
+    top: 0;
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+::ng-deep .dialog-twitter .mat-button{
+    background-color: #fff;
+    border: 1px solid #000 ;
+    border-radius: 30px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 0 4rem;
+    
+}
+
+
+
+
+::ng-deep .dialog-twitter  .twitter-button{
+    display: block;
+}
+
+::ng-deep .dialog-twitter .mat-dialog-actions{
+    margin: 16px 0 1px 0;
+}
+@media screen and (max-width: 768px){
+    ::ng-deep .dialog-twitter .close-content{
+        margin-top: 8px;
+        padding: 0 8px;
+    }
+    ::ng-deep .dialog-twitter  .content-dialog-twitter{
+        width: auto;
+        
+    }
+}
