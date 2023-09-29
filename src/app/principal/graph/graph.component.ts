@@ -100,7 +100,7 @@ export class GraphComponent implements OnInit {
   
     let uri:string
     
-    const textShare = `soy ${this.posY > 0? "populista" : "liberal"} de ${this.posX > 0? "derecha" : "izquierda"}*. Jugué al Compas Político y tuve este resultado.¿Queres saber cual es tu orientación? ¡Anímate a descubrirlo! \n Seguí informándote sobre las elecciones 2023 en merepresenta.info. \n Entra a https://compaspolitico.merepresenta.info/intro para ponerte a prueba.`
+    const textShare = `soy ${this.posY > 0? "populista" : "liberal"} de ${this.posX > 0? "derecha" : "izquierda"}*. Jugué al Compas Político y tuve este resultado.¿Queres saber cual es tu orientación? ¡Anímate a descubrirlo! \n Seguí informándote sobre las elecciones 2023 en merepresenta.info. \n Entra a https://compaspolitico.merepresenta.info para ponerte a prueba.`
 
     const twitterUri = `https://twitter.com/intent/tweet?text=*${textShare}`
     const whatsappUri = `whatsapp://send?text=*${textShare}`
@@ -320,9 +320,7 @@ export class GraphComponent implements OnInit {
       }
     }
     
-    setTimeout(() => {
-      this.openDialog()
-    }, 3500);
+    this.openDialog()
       
   }
 
