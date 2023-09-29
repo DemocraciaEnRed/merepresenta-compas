@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TriviaService } from '../trivia_service/trivia.service';
 import { AppComponent } from '../../app.component';
 import { MatIconModule } from '@angular/material/icon';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 
 import { GoogleChartsModule } from 'angular-google-charts';
@@ -46,13 +46,32 @@ interface RoundResultList {
 
 const defaultHeatmapValue = 0.2;
 
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+export interface DialogData {
+  Description: string;
+  Title: string;
+  selected: boolean;
+}
+@Component({
+  selector: 'dialog-result',
+  templateUrl: 'dialog-result.html',
+  styleUrls: ['./graph.component.css'],
+})
+export class DialogResult {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogResult>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { CategoriaResultado } from 'src/app/models/trivia';
-import { DialogShared } from "./dialogs/dialog.component";
-import { TwitterDialogComponent, WhatsappDialogComponent,/* ImageDialogComponent, */LinkDialogComponent } from "./dialogs/dinamic-dialog.component";
-
-type ComponentType = 'Twitter' | 'Whatsapp' | 'Link';
 
 
 @Component({
@@ -77,34 +96,34 @@ export class GraphComponent implements OnInit {
   chart: ChartComponent = new ChartComponent;
   chartOptions!: ApexChartOptions;
 
-  openDialog(typeComponent: ComponentType,) {
+  handleShare(rrss:string):void {
+  
+    let uri:string
     
-    /* const createImageFromGraph = ()=>{
-      const 
-    } */
-    
-    const componentMap = {
-      Twitter: {title:`Compartí tu resultado por twitter con tus amigues`,component:TwitterDialogComponent},
-      Whatsapp: {title:`Compartí tu resultado por whatsapp con tus amigues`,component:WhatsappDialogComponent},
-      //Image: {title:`copia este ${typeComponent} para compartir con los demas`,component:ImageDialogComponent},
-      Link: {title:`Copia y pega este link para compartir tu resultado con amigues`,component:LinkDialogComponent},
-    };
-    const dinamycComponent = componentMap[typeComponent]
-    
-    this.dialog.open(DialogShared, {
-      panelClass: `custom-dialog-container`,
-      maxWidth: '95vw',
-      maxHeight:  '90vh',
+    const textShare = `soy ${this.posY > 0? "populista" : "liberal"} de ${this.posX > 0? "derecha" : "izquierda"}*. Jugué al Compas Político y tuve este resultado.¿Queres saber cual es tu orientación? ¡Anímate a descubrirlo! \n Seguí informándote sobre las elecciones 2023 en merepresenta.info. \n Entra a https://compaspolitico.merepresenta.info/intro para ponerte a prueba.`
 
-      data: {
-        title: dinamycComponent.title, 
-        typeComponent,
-        posX:this.posX,
-        posY:this.posY,
-        results:this,
-        resultString: `${this.posY > 0? "populista" : "liberal"} de ${this.posX > 0? "derecha" : "izquierda"}`,
-        component: dinamycComponent.component
-      },
+    const twitterUri = `https://twitter.com/intent/tweet?text=*${textShare}`
+    const whatsappUri = `whatsapp://send?text=*${textShare}`
+    
+    switch (rrss) {
+      case 'Twitter':
+        window.open(twitterUri, '_blank')
+        break
+      case 'Whatsapp':
+        window.open(whatsappUri, '_blank')
+        break
+      case 'Link':
+        navigator.clipboard.writeText(textShare);
+        break
+      default:
+        break;
+    }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogResult, {
+      panelClass: `custom-dialog-container`,
+      data: this.categorias.find((el: any) => el.selected),
     });
   }
 
@@ -300,7 +319,10 @@ export class GraphComponent implements OnInit {
         });
       }
     }
-
+    
+    setTimeout(() => {
+      this.openDialog()
+    }, 3500);
       
   }
 

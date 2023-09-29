@@ -88,7 +88,7 @@ export const Cuestionario: Pregunta[] = [
         },
         {
         id: 6,
-        title: 'Las decisiones políticas se toman más de acuerdo a los intereses de unos pocos poderosos que pensando en las necesidades de la gente.',
+        title: 'Actualmente las decisiones políticas se toman más de acuerdo a los intereses de unos pocos poderosos que pensando en las necesidades de la gente.',
         opcionesPregunta: OpcionesData,
         QuestionScore: 1,
         Axis: "y",

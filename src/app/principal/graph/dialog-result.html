@@ -1,0 +1,13 @@
+<div mat-dialog-content class="card-dialog">
+    <mat-card class="card">
+        <mat-card-header class="card-header">
+          <mat-card-title >{{data.Title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <p>{{ data.Description }}</p>
+        </mat-card-content>
+        <mat-card-actions class="card-action">
+            <button mat-button (click)="onNoClick()">Cerrar</button>
+          </mat-card-actions>
+      </mat-card>
+</div>

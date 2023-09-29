@@ -48,6 +48,7 @@
     font-family: 'GeneralSans-Regular';
     background-color: black;
     color: white;
+    border-radius: 999px
 }
 
 .graph {
@@ -104,6 +105,14 @@
     position: absolute;
     left: 0;
     z-index: 2;
+}
+
+.img_comu{
+    margin: 8px 0;
+}
+
+.img_comu img{
+    height:200px;
 }
 
 .description_text_final {
@@ -163,6 +172,14 @@
     align-self: center;
 }
 
+.acordion-item-wrapper{
+    border: 1px solid;
+    width: 70%;
+    margin: 16px auto;
+    border-radius: 16px;
+    padding: 1rem;
+}
+
 .example-accordion-item-header {
     width: 100%;
     text-align: center;
@@ -188,9 +205,6 @@
     width: 100%;
 }
 
-.example-accordion-item-description {
-    margin-right: 20%;
-}
 
 .chosen {
     background-color: lightslategray;
@@ -211,7 +225,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
     font-family: 'GeneralSans-Bold';
-    margin-left: 20%;
 }
 
 .share {
@@ -226,4 +239,30 @@
     justify-content: center;
     align-self: center;
     padding: 20px;
+}
+
+::ng-deep .custom-dialog-container .mat-dialog-container{
+    border: 2px solid #000;
+    border-radius: 16px;
+}
+.card{
+    box-shadow: none;
+    font-family: 'Nippo-Medium';
+}
+.card-header{
+    display: flex;
+    justify-content: center;
+}
+
+.card-title{
+    text-align: center;
+}
+
+.card-content{
+
+}
+
+.card-action{
+    display: flex;
+    justify-content: center;
 }

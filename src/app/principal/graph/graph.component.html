@@ -36,41 +36,23 @@
       
       
       <div style="text-align: center;">
-        <button mat-button (click)="openDialog('Twitter')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/twitter.png"></button>
-        <button mat-button (click)="openDialog('Whatsapp')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/whatsapp.png"></button>
-        <button mat-button (click)="openDialog('Link')" class="button_img_redes" [attr.href]="'/chart?X='+ posX + '&Y='+posY" target="_blank"><img class=" shared-img" src="./../../../assets/imgs/shared-link.png"></button>
-        <!-- <button mat-button (click)="openDialog('Image')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/shared-img.png"></button> -->
+        <button mat-button (click)="handleShare('Twitter')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/twitter.png"></button>
+        <button mat-button (click)="handleShare('Whatsapp')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/whatsapp.png"></button>
+        <button mat-button (click)="handleShare('Link')" class="button_img_redes" [attr.href]="'/chart?X='+ posX + '&Y='+posY" target="_blank"><img class=" shared-img" src="./../../../assets/imgs/shared-link.png"></button>
+        <!-- <button mat-button (click)="handleShare('Image')" class="button_img_redes" href="" target="_blank"><img class=" shared-img shared-bg-black-img" src="./../../../assets/imgs/shared-img.png"></button> -->
     </div>
     </div>
-    <cdk-accordion class="example-accordion">
-      <cdk-accordion-item
-        *ngFor="let item of categorias; let i = index;"
-        #accordionItem="cdkAccordionItem"
-        class="example-accordion-item"
-        role="button"
-        tabindex="0"
-        [attr.id]="'accordion-header-' + i"
-        [attr.aria-expanded]="accordionItem.expanded"
-        [attr.aria-controls]="'accordion-body-' + i">
-        <div class="example-accordion-item-header" (click)="accordionItem.toggle()" [ngClass]="{'chosen': item.selected === true}">
-          <div class="item-title">{{ item.Title }}</div>
+
+    <div style="text-align: center;">
+      <p class="description_text_final">Te invitamos a Jugar a:: </p>
+        <a class="img_comu" mat-button href="https://trivia.merepresenta.info/" target="_blank"><img  src="./../../../assets/imgs/games/trivia.png"></a>
+        <a class="img_comu" mat-button href="https://quiendijo.merepresenta.info/" target="_blank"><img  src="./../../../assets/imgs/games/quiendijo.png"></a>
+        <a class="img_comu" mat-button href="https://dequelado.merepresenta.info/" target="_blank"><img  src="./../../../assets/imgs/games/espectrometro.png"></a>
+        <a class="img_comu" mat-button href="https://verdaderoofalso.merepresenta.info/" target="_blank"><img  src="./../../../assets/imgs/games/vof.png"></a>
         
-        <div class="example-accordion-item-description">
-          {{ accordionItem.expanded ? '∧' : '∨' }}
-          <!--Click to {{ accordionItem.expanded ? 'close' : 'open' }}-->
-        </div>
-      </div>
-        <div
-          class="example-accordion-item-body"
-          role="region"
-          [style.display]="accordionItem.expanded ? '' : 'none'"
-          [attr.id]="'accordion-body-' + i"
-          [attr.aria-labelledby]="'accordion-header-' + i">
-          {{ item.Description }}
-        </div>
-      </cdk-accordion-item>
-    </cdk-accordion>
-    <div id="chart" *ngIf="chartOptions.series.length">
+    </div>
+    
+    <!-- <div id="chart" *ngIf="chartOptions.series.length">
       <apx-chart
         [series]="chartOptions.series"
         [chart]="chartOptions.chart"
@@ -81,7 +63,7 @@
         [tooltip]="chartOptions.tooltip"
         [responsive]="chartOptions.responsive"
       ></apx-chart>
-    </div>
+    </div> -->
 
     <!--<p class="title_text_graph">{{titulo_resultado}}</p>
     <p class="description_text_graph">{{descripcion_resultado}}</p>-->
@@ -89,16 +71,50 @@
 
   <div style="text-align: center;">
     <p class="description_text_final">Encontrá más info sobre las elecciones en: </p>
-      <a class="btn_graph" mat-button href="https://merepresenta.info/" target="_blank">#MEREPRESENTA</a>
+      <a class="btn2_graph" mat-button href="https://merepresenta.info/" target="_blank">#MEREPRESENTA</a>
   </div>
 
-  <div>
+  <div style="text-align: center;">
+    <p class="description_text_final">Que significa estar en: </p>
+  </div>
+
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item
+    *ngFor="let item of categorias; let i = index;"
+    #accordionItem="cdkAccordionItem"
+    class="example-accordion-item"
+    role="button"
+    tabindex="0"
+    [attr.id]="'accordion-header-' + i"
+    [attr.aria-expanded]="accordionItem.expanded"
+    [attr.aria-controls]="'accordion-body-' + i">
+    <div class="acordion-item-wrapper">
+        <div class="example-accordion-item-header" (click)="accordionItem.toggle()" [ngClass]="{'chosen': item.selected === true}">
+          <div class="item-title">{{ item.Title }}</div>
+        
+        <div class="example-accordion-item-description">
+          {{ accordionItem.expanded ? '∧' : '∨' }}
+          <!--Click to {{ accordionItem.expanded ? 'close' : 'open' }}-->
+        </div>
+      </div>
+    </div>
+        <div
+          class="example-accordion-item-body"
+          role="region"
+          [style.display]="accordionItem.expanded ? '' : 'none'"
+          [attr.id]="'accordion-body-' + i"
+          [attr.aria-labelledby]="'accordion-header-' + i">
+          {{ item.Description }}
+        </div>
+      </cdk-accordion-item>
+  </cdk-accordion>
+  <!-- <div>
     <p class="description_text_final">Para conocer lo que hacemos seguinos en:</p>
     <div style="text-align: center;">
         <a href="https://www.instagram.com/democraciaenred/?hl=es-la" target="_blank"><img class="img_redes instagram" src="./../../../assets/imgs/instagram.png"></a>
         <a href="https://twitter.com/fundacionder?lang=es" target="_blank"><img class="img_redes twitter" src="./../../../assets/imgs/twitter.png"></a>
     </div>
-  </div>
+  </div> -->
   <div class="spacer_graph"></div>
 </div>
 

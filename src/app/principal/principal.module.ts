@@ -5,6 +5,8 @@ import { ChartsModule } from 'ng2-charts';
 
 import {MatButtonModule} from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog'
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 
@@ -15,7 +17,7 @@ import { VideoComponent } from './video/video.component';
 import { PreguntaComponent } from './pregunta/pregunta.component';
 import { DescriptionComponent } from '../description/description.component';
 import { SurveyComponent } from './survey/survey.component';
-import { GraphComponent } from './graph/graph.component';
+import { DialogResult, GraphComponent } from './graph/graph.component';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 
@@ -24,8 +26,6 @@ import {MatIconModule} from '@angular/material/icon';
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import { HttpClientModule } from '@angular/common/http';
-import { DialogShared } from './graph/dialogs/dialog.component';
-import {  LinkDialogComponent, TwitterDialogComponent, WhatsappDialogComponent } from './graph/dialogs/dinamic-dialog.component';
 
 
 @NgModule({
@@ -38,10 +38,7 @@ import {  LinkDialogComponent, TwitterDialogComponent, WhatsappDialogComponent }
     DescriptionComponent,
     SurveyComponent,
     GraphComponent,
-    DialogShared,
-    LinkDialogComponent,
-    WhatsappDialogComponent,
-    TwitterDialogComponent,
+    DialogResult
   ],
   exports: [
     HeaderComponent,
@@ -60,7 +57,9 @@ import {  LinkDialogComponent, TwitterDialogComponent, WhatsappDialogComponent }
     CdkAccordionModule,
     NgApexchartsModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule,
+    MatDividerModule
     
   ]
 })
