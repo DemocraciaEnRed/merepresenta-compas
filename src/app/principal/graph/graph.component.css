@@ -53,16 +53,16 @@
 
 .graph {
     width: 100%;
-    max-height: 500px;
+    /* max-height: 500px; */
 }
 
 .graph_canvas {
     width: 100%;
     height: auto;
-    max-width: 80%;
-    max-height: 450px;
+    max-width: 70%;
+    /* max-height: 500px; */
     text-align: center;
-    margin: 0 auto;
+    margin: 0 16px;
 }
 
 .text_graph {
@@ -162,6 +162,7 @@
 .rotulos {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .etiqueta_izq {
@@ -260,11 +261,17 @@
     text-align: center;
 }
 
-.card-content{
-
-}
 
 .card-action{
     display: flex;
     justify-content: center;
+}
+
+@media screen and (max-width:768px) {
+    
+.graph_canvas {
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+}
 }

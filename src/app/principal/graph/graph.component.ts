@@ -330,7 +330,7 @@ export class GraphComponent implements OnInit {
 
    scatterChartOptions: ChartOptions = {
     responsive: true,
-    aspectRatio: this.parent.deviceXs? 0.7 : 2.5,
+    aspectRatio: this.parent.deviceXs? 1 : 1.5,
     showLines:false,
     spanGaps:false,
     layout: {
@@ -378,6 +378,9 @@ export class GraphComponent implements OnInit {
       display: false
     },
     tooltips: {
+      filter: function (t) {
+       return t.datasetIndex === 0;
+      },
       callbacks: {
          title: function(t, d) {
             return "";
