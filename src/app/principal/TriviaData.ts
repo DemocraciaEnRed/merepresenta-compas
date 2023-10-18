@@ -225,7 +225,7 @@ export const Cuestionario: Pregunta[] = [
 
     export const categoriasResultado: CategoriaResultado[] =[{
         Title: 'Liberalismo de izquierda',
-        Description: 'Los personas de este cuadrante defienden la libertad individual, pero creen en la intervención del Estado en el mercado para promover derechos sociales. Estas personas suelen verse a sí mismas haciendo equilibrio entre la libertad individual y la justicia social. Aunque son escépticas respecto de la participación del Estado en los asuntos civiles, consideran que el Estado tiene un papel legítimo en garantizar condiciones de igualdad y en la promoción de sectores vulnerables. Así, si bien remarcan la importancia de la libertad, creen ésta también se relaciona con el acceso el acceso individual a bienes material (ej, una vivienda) e inmateriales (ej. educación) que justifican criterios de redistribución de recursos de los ricos a los pobres.',
+        Description: 'Los personas de este cuadrante defienden la libertad individual, pero creen en la intervención del Estado en el mercado para promover derechos sociales. Estas personas suelen verse a sí mismas haciendo equilibrio entre la libertad individual y la justicia social. Aunque son escépticas respecto de la participación del Estado en los asuntos civiles, consideran que el Estado tiene un papel legítimo en garantizar condiciones de igualdad y en la promoción de sectores vulnerables. Así, si bien remarcan la importancia de la libertad, creen ésta también se relaciona con el acceso individual a bienes material (ej, una vivienda) e inmateriales (ej. educación) que justifican criterios de redistribución de recursos de los ricos a los pobres.',
         selected: false},
         {
         Title: 'Liberalismo de derecha',
